@@ -1,0 +1,28 @@
+int motionSensorPin = 2;
+int ledPin = 13;
+int servoPin = 9;
+
+void setup() {
+  pinMode(motionSensorPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+  pinMode(servoPin, OUTPUT);
+}
+
+void loop() {
+  if (digitalRead(motionSensorPin) == HIGH) {
+    digitalWrite(ledPin, HIGH);
+    delay(1000);
+    digitalWrite(ledPin, LOW);
+    dispenseItem();
+  }
+}
+
+void dispenseItem() {
+  for (int i = 0; i < 180; i++) {
+    digitalWrite(servoPin, HIGH);
+    delayMicroseconds(500 + (i * 11));
+    digitalWrite(servoPin, LOW);
+    delay(20);
+  }
+  delay(1000);
+}
